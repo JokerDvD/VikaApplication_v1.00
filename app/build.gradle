@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "nit.vikaapplication_v100"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile files('libs/zbar.jar')
     compile files('libs/zxing_core.jar')
+    compile 'com.github.rey5137:material:1.2.1'
 }
