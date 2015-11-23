@@ -1,32 +1,18 @@
 package nit.vikaapplication_v100.QRCodeActivity;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
-
-import java.util.EnumMap;
-import java.util.Map;
 
 import nit.vikaapplication_v100.R;
 
@@ -39,13 +25,12 @@ public class QRCodeActivity extends AppCompatActivity {
     private Handler autoFocusHandler;
     private FrameLayout preview;
     private TextView scanText;
-    private ImageView bar_code;
-    private EditText code_for_bar;
     private ImageScanner scanner;
     private boolean barcodeScanned = false;
     private boolean previewing = true;
     private String lastScannedCode;
     private Image codeImage;
+
     static {
         System.loadLibrary("iconv");
     }
@@ -57,12 +42,8 @@ public class QRCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qrcode);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
         autoFocusHandler = new Handler();
-
         preview = (FrameLayout) findViewById(R.id.cameraPreview);
-
 
         /* Instance barcode scanner */
         scanner = new ImageScanner();
@@ -70,33 +51,12 @@ public class QRCodeActivity extends AppCompatActivity {
         scanner.setConfig(0, Config.Y_DENSITY, 3);
 
         scanText = (TextView) findViewById(R.id.scanText);
-
-        bar_code = (ImageView) findViewById(R.id.bar_code);
-        code_for_bar = (EditText) findViewById(R.id.code_for_bar);
-        code_for_bar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                //
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                //
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String text = editable.toString();
-                generateCodeImage(text);
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         resumeCamera();
-        generateCodeImage(code_for_bar.getText().toString());
     }
 
     public void onPause() {
@@ -176,66 +136,4 @@ public class QRCodeActivity extends AppCompatActivity {
             autoFocusHandler.postDelayed(doAutoFocus, 1000);
         }
     };
-
-    private void generateCodeImage(String text) {
-        try {
-            Bitmap bitmap = encodeAsBitmap(text, BarcodeFormat.QR_CODE, 150, 150);
-            bar_code.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Generate bitmap image with QR or BAR code.
-     *
-     * @param code       encoded text
-     * @param format     code standard
-     * @param img_width  target image width
-     * @param img_height target image height
-     * @return Bitmap image with code
-     * @throws WriterException exception
-     */
-    private Bitmap encodeAsBitmap(String code, BarcodeFormat format, int img_width, int img_height) throws WriterException {
-        if (code == null) {
-            return null;
-        }
-        Map<EncodeHintType, Object> hints = null;
-        String encoding = guessAppropriateEncoding(code);
-        if (encoding != null) {
-            hints = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
-            hints.put(EncodeHintType.CHARACTER_SET, encoding);
-        }
-        MultiFormatWriter writer = new MultiFormatWriter();
-        BitMatrix result;
-        try {
-            result = writer.encode(code, format, img_width, img_height, hints);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        }
-        int width = result.getWidth();
-        int height = result.getHeight();
-        int[] pixels = new int[width * height];
-        for (int y = 0; y < height; y++) {
-            int offset = y * width;
-            for (int x = 0; x < width; x++) {
-                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
-            }
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    private static String guessAppropriateEncoding(CharSequence contents) {
-        // Very crude at the moment
-        for (int i = 0; i < contents.length(); i++) {
-            if (contents.charAt(i) > 0xFF) {
-                return "UTF-8";
-            }
-        }
-        return null;
-    }
 }

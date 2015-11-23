@@ -4,15 +4,19 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/darker_gray">
+              android:background="@android:color/darker_gray"
+              android:weightSum="1">
 
     <FrameLayout
         android:id="@+id/cameraPreview"
-        android:layout_width="200dip"
-        android:layout_height="200dip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="20dip"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <TextView
         android:id="@+id/scanText"
@@ -20,23 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_margin="10dip"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/black" />
-
-
-    <ImageView
-        android:id="@+id/bar_code"
-        android:layout_width="150dip"
-        android:layout_height="150dip"
-        android:layout_gravity="center"
-        android:background="@android:color/white" />
-
-    <EditText
-        android:id="@+id/code_for_bar"
-        android:layout_width="200dip"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dip"
-        android:text="123456789" />
-
+        android:layout_gravity="left|center_horizontal"
+        android:textColor="@android:color/black"
+        android:layout_weight="1"/>
 </LinearLayout>
