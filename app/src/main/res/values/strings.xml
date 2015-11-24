@@ -14,4 +14,6 @@
     <string name="action_main">Main</string>
     <string name="action_camera">Camera</string>
     <string name="action_exit">Exit</string>
+
+    <string name="result_back_button">Return previously screen</string>
 </resources>

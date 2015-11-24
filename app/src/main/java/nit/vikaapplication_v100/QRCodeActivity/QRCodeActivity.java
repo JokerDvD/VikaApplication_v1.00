@@ -1,5 +1,6 @@
 package nit.vikaapplication_v100.QRCodeActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
 import nit.vikaapplication_v100.R;
+import nit.vikaapplication_v100.RecourseFile.RecourseString;
+import nit.vikaapplication_v100.ResultActivity.ResultActivity;
 
 public class QRCodeActivity extends AppCompatActivity {
 
@@ -111,9 +114,11 @@ public class QRCodeActivity extends AppCompatActivity {
         }
     };
 
+            /*
+             * Getting qrCode result
+             * */
     Camera.PreviewCallback previewCb = new Camera.PreviewCallback() {
         public void onPreviewFrame(byte[] data, Camera camera) {
-//            Log.d("CameraTestActivity", "onPreviewFrame data length = " + (data != null ? data.length : 0));
             codeImage.setData(data);
             int result = scanner.scanImage(codeImage);
             if (result != 0) {
@@ -122,6 +127,10 @@ public class QRCodeActivity extends AppCompatActivity {
                     lastScannedCode = sym.getData();
                     if (lastScannedCode != null) {
                         scanText.setText(getString(R.string.scan_result_label) + lastScannedCode);
+
+                        Intent intent=new Intent(QRCodeActivity.this, ResultActivity.class);
+                        intent.putExtra(RecourseString.ScannedCode, lastScannedCode);
+                                startActivity(intent);
                         barcodeScanned = true;
                     }
                 }

@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="nit.vikaapplication_v100"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nit.vikaapplication_v100" >
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_main"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".FaceActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".QRCodeActivity.QRCodeActivity">
+        <activity android:name=".QRCodeActivity.QRCodeActivity" >
         </activity>
-        <activity android:name=".SplashActivity.SplashActivity">
+        <activity android:name=".SplashActivity.SplashActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ResultActivity.ResultActivity" >
         </activity>
     </application>
 
