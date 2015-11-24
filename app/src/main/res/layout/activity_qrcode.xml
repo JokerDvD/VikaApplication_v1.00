@@ -18,13 +18,17 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
+
     <TextView
         android:id="@+id/scanText"
         android:text="@string/scan_process_label"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_margin="10dip"
+        android:background="#7000"
         android:layout_gravity="left|center_horizontal"
         android:textColor="@android:color/black"
         android:layout_weight="1"/>
+
+
 </LinearLayout>
