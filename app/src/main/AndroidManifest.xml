@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".ResultActivity.ResultActivity" >
         </activity>
+        <activity android:name=".AboutActivity.AboutActivity" >
+        </activity>
     </application>
 
 </manifest>
