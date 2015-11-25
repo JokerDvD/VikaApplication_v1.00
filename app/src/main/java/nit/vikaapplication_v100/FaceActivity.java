@@ -13,12 +13,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import nit.vikaapplication_v100.AboutActivity.AboutActivity;
 import nit.vikaapplication_v100.QRCodeActivity.QRCodeActivity;
 
 public class FaceActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
      View coordinatorLayoutView;
+    Spinner spinnerValue1,spinnerValue2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,21 @@ public class FaceActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         coordinatorLayoutView= findViewById(R.id.snackbarPosition);
+
+        spinnerValue1=(Spinner)findViewById(R.id.spinnerValue1);
+        spinnerValue2=(Spinner)findViewById(R.id.spinnerValue2);
+
+        String[] value1=getResources().getStringArray(R.array.value1);
+        ArrayAdapter<String> adapterSpinner1=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,value1);
+        adapterSpinner1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerValue1.setAdapter(adapterSpinner1);
+
+
+        String[] value2=getResources().getStringArray(R.array.value2);
+        ArrayAdapter <String> adapterSpinner2=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,value2);
+        adapterSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerValue1.setAdapter(adapterSpinner2);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +115,11 @@ public class FaceActivity extends AppCompatActivity
                 break;
 
             case R.id.action_settings:
+
+                break;
+            case R.id.action_about:
+                Intent intent=new Intent(FaceActivity.this, AboutActivity.class);
+                startActivity(intent);
 
                 break;
         }
