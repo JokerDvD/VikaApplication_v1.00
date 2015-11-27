@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".AboutActivity.AboutActivity" >
         </activity>
+        <activity android:name=".ResponseAcitivity.ResponseAcivity" >
+        </activity>
     </application>
 
 </manifest>

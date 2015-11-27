@@ -25,6 +25,8 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        replaceFragment(0);
+
         fm = getFragmentManager();
         aboutApp = (Button) findViewById(R.id.about_app);
         aboutApp.setOnClickListener(this);

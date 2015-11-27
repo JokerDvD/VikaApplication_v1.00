@@ -3,6 +3,7 @@ package nit.vikaapplication_v100.QRCodeActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import net.sourceforge.zbar.SymbolSet;
 
 import nit.vikaapplication_v100.R;
 import nit.vikaapplication_v100.RecourseFile.RecourseString;
-import nit.vikaapplication_v100.ResultActivity.ResultActivity;
+import nit.vikaapplication_v100.ResponseAcitivity.ResponseAcivity;
 
 public class QRCodeActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class QRCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autoFocusHandler = new Handler();
         preview = (FrameLayout) findViewById(R.id.cameraPreview);
 
@@ -52,6 +53,10 @@ public class QRCodeActivity extends AppCompatActivity {
         scanner = new ImageScanner();
         scanner.setConfig(0, Config.X_DENSITY, 3);
         scanner.setConfig(0, Config.Y_DENSITY, 3);
+
+        /*Заглушка*/
+//        new TranferASynkTask().execute();
+
 
         scanText = (TextView) findViewById(R.id.scanText);
     }
@@ -127,8 +132,9 @@ public class QRCodeActivity extends AppCompatActivity {
                     lastScannedCode = sym.getData();
                     if (lastScannedCode != null) {
                         scanText.setText(getString(R.string.scan_result_label) + lastScannedCode);
-
-                        Intent intent=new Intent(QRCodeActivity.this, ResultActivity.class);
+                        /*Pass Scanning data in type string to Response Activity
+                        * then, in Response Activity do query and show Response*/
+                        Intent intent=new Intent(QRCodeActivity.this, ResponseAcivity.class);
                         intent.putExtra(RecourseString.ScannedCode, lastScannedCode);
                                 startActivity(intent);
                         barcodeScanned = true;
@@ -145,4 +151,25 @@ public class QRCodeActivity extends AppCompatActivity {
             autoFocusHandler.postDelayed(doAutoFocus, 1000);
         }
     };
+
+    private class TranferASynkTask extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Intent intent =new Intent(QRCodeActivity.this,ResponseAcivity.class);
+            intent.putExtra(RecourseString.ScannedCode,"true");
+            startActivity(intent);
+        }
+    }
 }
