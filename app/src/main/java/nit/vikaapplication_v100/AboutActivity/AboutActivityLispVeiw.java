@@ -85,7 +85,7 @@ public class AboutActivityLispVeiw extends AppCompatActivity {
                 //tvInfo.setText("Равзвернули " + ah.getGroupText(groupPosition));
             }
         });
-
+//jk
         // разворачиваем группу с позицией 2
         //elvMain.expandGroup(2);
     }
