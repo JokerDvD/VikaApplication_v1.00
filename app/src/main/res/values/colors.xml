@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#229662</color>
+    <color name="colorPrimaryDark">#309f69</color>
+    <color name="colorAccent">#6ed6a5</color>
+
+    <color name="about_buttom">#abcdec</color>
+    //цвет текста negativeActivity
+    <color name="negative_red">#800000</color>
+    <color name="negative_pink">#ffcbdb</color>
+</resources>

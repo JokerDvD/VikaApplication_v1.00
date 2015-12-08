@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="nit.vikaapplication_v100.ResponseAcitivity.NegativeResponseFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Negative "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/negative_data_1"
+        android:id="@+id/textOfInf"
+        android:layout_gravity="center"
+        android:gravity="bottom|center_horizontal"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="138dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/negative_data"
+        android:id="@+id/textOfNegative"
+        android:textColor="@color/negative_red"
+        android:layout_gravity="top|center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/rectangel"
+        android:layout_marginTop="35dp"
+
+        android:foregroundGravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/lisp_address"
+        android:id="@+id/lisp_address"
+        android:layout_marginBottom="180dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+</FrameLayout>
