@@ -19,7 +19,7 @@ public class AboutActivityLispVeiw extends AppCompatActivity {
     AdapterHelper ah;
     SimpleExpandableListAdapter adapter;
     TextView tvInfo;
-//
+
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
